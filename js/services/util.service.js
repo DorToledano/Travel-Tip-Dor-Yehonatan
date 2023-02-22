@@ -1,11 +1,11 @@
-
-
 export const utilService = {
     getRandomIntInclusive,
     randomPastTime,
     makeId,
     saveToStorage,
     loadFromStorage,
+    getValByQSParams,
+    setQueryStringParams,
 }
 
 function getRandomIntInclusive(min, max) {
@@ -39,4 +39,9 @@ function saveToStorage(key, value) {
 function loadFromStorage(key) {
     const data = localStorage.getItem(key)
     return (data) ? JSON.parse(data) : undefined
+}
+
+function getValByQSParams(param) { //gets query string
+    const queryStringParams = new URLSearchParams(window.location.search)
+    return queryStringParams.get(param)
 }

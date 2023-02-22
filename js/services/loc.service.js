@@ -7,24 +7,11 @@ export const locService = {
     removeLoc,
     saveLoc,
     createLoc,
+    getQSParams,
 }
 
-//Create - C
-//Read - R
-//Update - U
-//Delete - D
-//List - L
-
-const LOCS_KEY = 'LocsDB' //! this is an array of objects
+const LOCS_KEY = 'LocsDB' //this is an array of objects
 _createLocs()
-
-// function getLoc() {
-//     return new Promise((resolve) => {
-//         setTimeout(() => {
-//             resolve(locs)
-//         }, 2000)
-//     })
-// }
 
 function queryLocs() {
     return storageService.query(LOCS_KEY)
@@ -82,4 +69,14 @@ function _createLoc(
     id = utilService.makeId(),
 ) {
     return { id, name, lat, lng, weather, createdAt, updatedAt }
+}
+
+function getQSParams() {
+    const lat = getValByQSParams('lat')
+    const lng = getValByQSParams('lng')
+    return (lat, lng)
+}
+
+function copyLocs() {
+
 }

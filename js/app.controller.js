@@ -5,20 +5,16 @@ export const controller = {
     renderLocs,
 }
 
-//hi dor
 window.onload = onInit
 window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
 window.ongGetLoc = onGetLocs
 window.onGetUserPos = onGetUserPos
 window.onRemoveLoc = onRemoveLoc
-
 // window.onAddPos= onAddPos
 
-
-
 function onInit() {
-    mapService.initMap()
+    mapService.initMap(locService.getQSParams())
         .then(() => {
             // console.log('Map is ready')
         })
@@ -83,4 +79,6 @@ function renderLocs(locs) {
     document.querySelector('.locs-table').innerHTML = strHtmls.join("")
 }
 
-
+function onCopyLocs() {
+    locService.copyLocs()
+}

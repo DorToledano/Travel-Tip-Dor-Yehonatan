@@ -7,10 +7,6 @@ export const mapService = {
   addMarker,
   panTo,
 }
-
-// window.panTo = panTo
-
-const LOCS_KEY = 'LocsDB' //! this is an array of objects
 // Var that is used throughout this Module (not global)
 var gMap
 
