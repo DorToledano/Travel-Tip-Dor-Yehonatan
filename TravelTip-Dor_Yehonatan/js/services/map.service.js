@@ -20,18 +20,17 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 center: { lat, lng },
                 zoom: 15
             })
-            gMap.addListener("click", (mapsMouseEvent) => { //TODO: make it save the locations and render them
+            gMap.addListener("click", (mapsMouseEvent) => {
                 const locName = prompt(`What's this location called?`)
                 const loc = JSON.parse(JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)) //returns {lng, lat}
                 storageService.post(LOCS_KEY, { locName, lat: loc.lat, lng: loc.lng })
-                setTimeout(() => storageService.query(LOCS_KEY).then(res => console.log(`locations from timeout:`, res)), 1000) //logs the save
+                // setTimeout(() => storageService.query(LOCS_KEY).then(res => console.log(`locations from timeout:`, res)), 1000) //logs the save
                 new google.maps.Marker({
                     position: loc,
                     map: gMap,
                 })
-                const center = new google.maps.LatLng(loc.lat, loc.lng);
-                gMap.panTo(center) //TODO: check if it's good
-                // showUserLocations()
+                panTo(loc.lat, loc.lng)
+                // showUserLocations() //TODO: render locations on html
             })
             // console.log('Map!', gMap)
         })
@@ -56,7 +55,7 @@ function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
     const API_KEY = 'AIzaSyC-2VCeXJPVk5bSEQy5TEZVrn0rp1Mrzwc'
     var elGoogleApi = document.createElement('script')
-    elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`
+    elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}` //TODO: ask about &callback=initMap
     elGoogleApi.async = true
     document.body.append(elGoogleApi)
 
