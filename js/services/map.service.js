@@ -1,6 +1,7 @@
 import { controller } from '../app.controller.js'
 import { storageService } from './async-storage.service.js'
 import { locService } from './loc.service.js'
+import { utilService } from './util.service.js'
 
 export const mapService = {
   initMap,
@@ -10,7 +11,7 @@ export const mapService = {
 // Var that is used throughout this Module (not global)
 var gMap
 
-function initMap(lat = 32.0749831, lng = 34.9120554) {
+function initMap(lat = +utilService.getValByQSParams('lat') || 32.0749831, lng = +utilService.getValByQSParams('lng') || 34.9120554) {
   return _connectGoogleApi().then(() => {
     gMap = new google.maps.Map(document.querySelector('#map'), {
       center: { lat, lng },
@@ -59,6 +60,19 @@ function _connectGoogleApi() {
     elGoogleApi.onload = resolve
     elGoogleApi.onerror = () => reject('Google script failed to load')
   })
+}
+
+function getPosByAddressSearch(address) {
+  const GEOCODING_API = 'AIzaSyA6woSJpgXJJ_8ddaNMP_acIlxUKSFKHfo'
+
+  const url = 'https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyA6woSJpgXJJ_8ddaNMP_acIlxUKSFKHfo'
+  // if(gCache) return Promise.resolve(gCache)
+
+  return axios.get(url)
+    .then(res => {
+      gCache = res.data
+      return res.data
+    })
 }
 
 // function createCenterControl() {

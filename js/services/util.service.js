@@ -5,7 +5,6 @@ export const utilService = {
     saveToStorage,
     loadFromStorage,
     getValByQSParams,
-    setQueryStringParams,
 }
 
 function getRandomIntInclusive(min, max) {

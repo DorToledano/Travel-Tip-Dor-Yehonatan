@@ -11,10 +11,11 @@ window.onPanTo = onPanTo
 window.ongGetLoc = onGetLocs
 window.onGetUserPos = onGetUserPos
 window.onRemoveLoc = onRemoveLoc
+window.onCopyLocs = onCopyLocs
 // window.onAddPos= onAddPos
 
 function onInit() {
-    mapService.initMap(locService.getQSParams())
+    mapService.initMap()
         .then(() => {
             // console.log('Map is ready')
         })
@@ -47,9 +48,13 @@ function getPosition() {
 function onGetUserPos() {
     getPosition()
         .then(pos => {
-            //TODO: save user pos
-            //TODO: pan to user pos
+            // console.log(`pos:`, pos)
+            // console.log('pos.coords', pos.coords)
+            // console.log('pos.coords.lat,pos.coords.lng', pos.coords.lat, pos.coords.lng)
+            //pan to user pos
+            onPanTo(pos.coords.latitude, pos.coords.longitude)ע
             // console.log('User position is:', pos.coords)
+            // save user pos
             document.querySelector('.user-pos').innerText =
                 `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
         })
@@ -80,5 +85,5 @@ function renderLocs(locs) {
 }
 
 function onCopyLocs() {
-    locService.copyLocs()
+    navigator.clipboard.writeText('https://dortoledano.github.io/Travel-Tip-Dor-Yehonatan/index.html?lat=32.0749838&lng=34.8820554')
 }
