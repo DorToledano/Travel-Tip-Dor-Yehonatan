@@ -6,6 +6,7 @@ export const locService = {
     getLoc,
     removeLoc,
     saveLoc,
+    createLoc,
 }
 
 //Create - C
@@ -27,7 +28,6 @@ _createLocs()
 
 function queryLocs() {
     return storageService.query(LOCS_KEY)
-    // .then(locs => locs)
 }
 
 function getLoc(locId) {
@@ -44,6 +44,18 @@ function saveLoc(loc) { //if it has id, it updates, if not it creates
     } else {
         return storageService.post(LOCS_KEY, loc)
     }
+}
+
+function createLoc(
+    name = 'UNKNOWN',
+    lat = 32.047104,
+    lng = 34.832384,
+    weather = null,
+    createdAt = Date.now(),
+    updatedAt = Date.now(),
+    id = null,
+) {
+    return saveLoc({ id, name, lat, lng, weather, createdAt, updatedAt })
 }
 
 function _createLocs() {

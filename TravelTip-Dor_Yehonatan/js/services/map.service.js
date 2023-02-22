@@ -1,4 +1,6 @@
+import { controller } from '../app.controller.js'
 import { storageService } from './async-storage.service.js'
+import { locService } from './loc.service.js'
 
 export const mapService = {
   initMap,
@@ -19,17 +21,18 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
       zoom: 15,
     })
     gMap.addListener('click', (mapsMouseEvent) => {
-      const locName = prompt(`What's this location called?`) //TODO: use infowindow as modal
+      const locName = prompt(`What's this location called?`) //! not doing use infowindow as modal
       const loc = JSON.parse(
         JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
       ) //returns {lng, lat}
-      storageService.post(LOCS_KEY, { locName, lat: loc.lat, lng: loc.lng }) //TODO: save on loc service
       new google.maps.Marker({
         position: loc,
         map: gMap,
       })
       panTo(loc.lat, loc.lng)
-      // showUserLocations() //TODO: render locations on html
+      locService.createLoc(locName, lng, lat)
+        .then(loc => locService.queryLocs())
+        .then(locs => controller.renderLocs(locs))
     })
   })
 }
