@@ -66,6 +66,7 @@ function onPanTo(lat, lng) {
     // console.log('Panning the Map')
     mapService.panTo(lat, lng)
 
+    
 }
 
 function onRemoveLoc(locId) {
