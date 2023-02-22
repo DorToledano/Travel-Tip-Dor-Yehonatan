@@ -6,15 +6,15 @@ export const mapService = {
     panTo
 }
 
-const LOC_KEY = 'LocDB'
+const LOCS_KEY = 'LocsDB' //! this is an array of objects
 // Var that is used throughout this Module (not global)
 var gMap
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
-    console.log('InitMap')
+    // console.log('InitMap')
     return _connectGoogleApi()
         .then(() => {
-            console.log('google available')
+            // console.log('google available')
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
                 center: { lat, lng },
@@ -23,8 +23,8 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             gMap.addListener("click", (mapsMouseEvent) => { //TODO: make it save the locations and render them
                 const locName = prompt(`What's this location called?`)
                 const loc = JSON.parse(JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)) //returns {lng, lat}
-                storageService.post(LOC_KEY, { locName, lat: loc.lat, lng: loc.lng })
-                setTimeout(() => storageService.query(LOC_KEY).then(res => console.log(`res:`, res)), 1000)
+                storageService.post(LOCS_KEY, { locName, lat: loc.lat, lng: loc.lng })
+                setTimeout(() => storageService.query(LOCS_KEY).then(res => console.log(`locations from timeout:`, res)), 1000) //logs the save
                 new google.maps.Marker({
                     position: loc,
                     map: gMap,
@@ -33,7 +33,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 gMap.panTo(center) //TODO: check if it's good
                 // showUserLocations()
             })
-            console.log('Map!', gMap)
+            // console.log('Map!', gMap)
         })
 }
 
