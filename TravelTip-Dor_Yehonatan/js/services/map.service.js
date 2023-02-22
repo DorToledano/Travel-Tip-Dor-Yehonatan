@@ -21,11 +21,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 zoom: 15
             })
             gMap.addListener("click", (mapsMouseEvent) => {
-                const locName = prompt(`What's this location called?`)
-
-                // infowindow
+                const locName = prompt(`What's this location called?`) //TODO: use infowindow as modal
                 const loc = JSON.parse(JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)) //returns {lng, lat}
-                storageService.post(LOCS_KEY, { locName, lat: loc.lat, lng: loc.lng })
+                storageService.post(LOCS_KEY, { locName, lat: loc.lat, lng: loc.lng }) //TODO: save on loc service
                 // setTimeout(() => storageService.query(LOCS_KEY).then(res => console.log(`locations from timeout:`, res)), 1000) //logs the save
                 new google.maps.Marker({
                     position: loc,

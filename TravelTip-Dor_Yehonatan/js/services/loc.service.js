@@ -51,7 +51,7 @@ function _createLocs() {
 
 }
 function _createDemoLocs() {
-    const demo_locs = ['lol', 'korea']
+    // const demo_locs = ['lol', 'korea']
     let locs = []
     for (let i = 0; i < 5; i++) {
         locs.push(_createLoc(`Demo Location #${i + 1}`))
@@ -61,12 +61,12 @@ function _createDemoLocs() {
 
 function _createLoc(
     name,
-    id = utilService._makeId(),
     lat = 32.047104,
     lng = 34.832384,
     weather = null,
     createdAt = utilService.randomPastTime(),
-    updatedAt = Date.now()
+    updatedAt = Date.now(),
+    id = utilService._makeId(),
 ) {
     return { id, name, lat, lng, weather, createdAt, updatedAt }
 }
