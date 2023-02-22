@@ -2,38 +2,39 @@ import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service.js'
 
 export const locService = {
-    getLocs,
-    query,
-    get,
-    remove,
-    save,
+    getLoc,
+    queryLocs,
+    getLoc,
+    removeLoc,
+    saveLoc,
 }
+
 
 const LOCS_KEY = 'LocsDB' //! this is an array of objects
 _createLocs()
 
-function getLocs() {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(locs)
-        }, 2000)
-    })
-}
+// function getLoc() {
+//     return new Promise((resolve) => {
+//         setTimeout(() => {
+//             resolve(locs)
+//         }, 2000)
+//     })
+// }
 
-function query() {
+function queryLocs() {
     return storageService.query(LOCS_KEY)
-        .then(locs => locs)
+        // .then(locs => locs)
 }
 
-function get(locId) {
+function getLoc(locId) {
     return storageService.get(LOCS_KEY, locId)
 }
 
-function remove(locId) {
+function removeLoc(locId) {
     return storageService.remove(LOCS_KEY, locId)
 }
 
-function save(loc) { //if it has id, it updates, if not it creates
+function saveLoc(loc) { //if it has id, it updates, if not it creates
     if (loc.id) {
         return storageService.put(LOCS_KEY, loc)
     } else {
@@ -42,21 +43,23 @@ function save(loc) { //if it has id, it updates, if not it creates
 }
 
 function _createLocs() {
+// function createLocs() {
     storageService.query(LOCS_KEY)
         .then(locs => {
             if (!locs || !locs.length) {
                 _createDemoLocs()
             }
+            
         })
 
 }
 function _createDemoLocs() {
-    // const demo_locs = ['lol', 'korea']
+    const demo_locs = ['TLV', 'korea','London','Dubai','NY']
     let locs = []
     for (let i = 0; i < 5; i++) {
-        locs.push(_createLoc(`Demo Location #${i + 1}`))
+        locs.push(_createLoc(`${demo_locs[i]}`))
     }
-    storageService.saveToStorage(LOCS_KEY, locs)
+    storageService.post(LOCS_KEY, locs)
 }
 
 function _createLoc(

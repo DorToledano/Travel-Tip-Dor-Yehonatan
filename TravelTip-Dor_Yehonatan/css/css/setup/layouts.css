@@ -6,6 +6,8 @@
 		'weather map'
 		'locs map'
 		'user-loc user-loc';
+
+	gap: 2em;
 }
 /*.copy-loc-container {
 	grid-area: copy-loc;

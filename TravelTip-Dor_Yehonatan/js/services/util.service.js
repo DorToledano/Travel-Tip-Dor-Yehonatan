@@ -1,5 +1,9 @@
+
+
 export const utilService = {
     getRandomIntInclusive,
+    randomPastTime,
+    _makeId,
 }
 
 function getRandomIntInclusive(min, max) {
