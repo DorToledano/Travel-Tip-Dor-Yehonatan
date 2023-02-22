@@ -7,6 +7,10 @@ window.onPanTo = onPanTo
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
 
+// window.onAddPos= onAddPos
+
+
+
 function onInit() {
     mapService.initMap()
         .then(() => {

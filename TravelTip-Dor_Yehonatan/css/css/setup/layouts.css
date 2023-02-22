@@ -1,12 +1,24 @@
-
-
-.main-layout{
-    display: grid;
-    grid-template-areas: 
-    "header header"
-    "copy-loc copy-loc"
-    "weather map"
-    "locs map"
-    "user-loc user-loc"
-    ;
+.main-layout {
+	display: grid;
+	grid-template-areas:
+		'header header'
+		'copy-loc copy-loc'
+		'weather map'
+		'locs map'
+		'user-loc user-loc';
 }
+/*.copy-loc-container {
+	grid-area: copy-loc;
+}
+.user-loc-container {
+	grid-area: user-loc;
+}
+.map-container {
+	grid-area: map;
+}
+.locs-table {
+	grid-area: locs;
+}
+.weather-container {
+	grid-area: weather;
+ } */

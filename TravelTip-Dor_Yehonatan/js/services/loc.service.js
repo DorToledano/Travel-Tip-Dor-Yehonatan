@@ -13,7 +13,7 @@ const LOCS_KEY = 'LocsDB' //! this is an array of objects
 _createLocs()
 
 function getLocs() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         setTimeout(() => {
             resolve(locs)
         }, 2000)
@@ -51,6 +51,7 @@ function _createLocs() {
 
 }
 function _createDemoLocs() {
+    const demo_locs = ['lol', 'korea']
     let locs = []
     for (let i = 0; i < 5; i++) {
         locs.push(_createLoc(`Demo Location #${i + 1}`))
