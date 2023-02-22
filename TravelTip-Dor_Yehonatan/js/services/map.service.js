@@ -1,9 +1,12 @@
+import { storageService } from "./async-storage.service.js"
+
 export const mapService = {
     initMap,
     addMarker,
     panTo
 }
 
+const LOC_KEY = 'LocDB'
 // Var that is used throughout this Module (not global)
 var gMap
 
@@ -19,8 +22,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             })
             gMap.addListener("click", (mapsMouseEvent) => { //TODO: make it save the locations and render them
                 const locName = prompt(`What's this location called?`)
-                const loc = JSON.parse(JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2))
-                // saveLocation(locName, loc)
+                const loc = JSON.parse(JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)) //returns {lng, lat}
+                storageService.post(LOC_KEY, { locName, lat: loc.lat, lng: loc.lng })
+                setTimeout(() => storageService.query(LOC_KEY).then(res => console.log(`res:`, res)), 1000)
                 new google.maps.Marker({
                     position: loc,
                     map: gMap,
