@@ -1,0 +1,18 @@
+.map-container {
+	grid-area: map;
+}
+
+.weather-container {
+	grid-area: weather;
+	background-color: antiquewhite;
+	width: 300px;
+	height: 300px;
+}
+
+.locs-table {
+	grid-area: locs;
+	background-color: rgb(250, 215, 236);
+	width: 300px;
+	height: 300px;
+	overflow-y: auto;
+}
