@@ -52,7 +52,7 @@ function onGetUserPos() {
             // console.log('pos.coords', pos.coords)
             // console.log('pos.coords.lat,pos.coords.lng', pos.coords.lat, pos.coords.lng)
             //pan to user pos
-            onPanTo(pos.coords.latitude, pos.coords.longitude)ע
+            onPanTo(pos.coords.latitude, pos.coords.longitude)
             // console.log('User position is:', pos.coords)
             // save user pos
             document.querySelector('.user-pos').innerText =

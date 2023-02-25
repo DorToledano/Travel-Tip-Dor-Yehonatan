@@ -1,6 +1,0 @@
-.copy-loc-container {
-	grid-area: copy-loc;
-	display: flex;
-	justify-content: space-evenly;
-	align-items: center;
-}
